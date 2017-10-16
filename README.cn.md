@@ -1,21 +1,11 @@
-# fabric explorer
+# introduction
 
-Fabric-explorer is a simple, powerful, easy-to-use, highly maintainable, open source fabric browser. Fabric-explorer can reduce the difficulty of learning and using fabric, so that we can intuitively feel the fabric of the powerful features.
+fabric explorer 是帮助大家学习、管理、监控fabric 的开源项目。
 
-## Directory Structure
-```
-├── app                    fabric GRPC interface
-├── artifacts              
-├── blockdata              the fabric data struct sample
-├── db			   the mysql script and help class
-├── explorer_client        Web Ui
-├── listener               websocket listener
-├── metrics                metrics about tx count per minute and block count per minute
-├── service                the service 
-├── socket		   push real time data to front end
-├── timer                    
-└── utils                    
-```
+[English document](https://github.com/onechain/fabric-explorer#Demo)
+
+## Demo
+[See live demo here](http://112.124.115.82:8800/)
 
 
 ## Requirements
@@ -27,12 +17,14 @@ Fabric-explorer is a simple, powerful, easy-to-use, highly maintainable, open so
 * git
 * mysql
 
-## Database setup
+## 执行创建数据库脚本: db/fabricexplorer.sql
+
 Run the database setup scripts located under `db/fabricexplorer.sql`
 
 `mysql -u<username> -p < db/fabricexplorer.sql`
 
-## set fabric docker env
+
+## 设置fabric docker运行环境
 
 1. `git clone https://github.com/onechain/fabric-docker-compose-svt.git`
 2. `mv fabric-docker-compose-svt $GOPATH/src/github.com/hyperledger/fabric/examples/`
@@ -41,16 +33,14 @@ Run the database setup scripts located under `db/fabricexplorer.sql`
 5. `./start.sh`
 
 
-## start fabric-explorer
+## 启动fabric 浏览器
 
 1. `git clone https://github.com/onechain/fabric-explorer.git`
 2. `rm -rf ./artifacts/crypto-config/`
 3. `cp -r $GOPATH/src/github.com/hyperledger/fabric/examples/fabric-docker-compose-svt/crypto-config ./fabric-explorer/artifacts/crypto-config/`
-
-4. modify config.json,set channel,mysql,tls (if you use tls communication, please set  enableTls  true ,if not set false) 
+4. 修改config.json,配置channel,mysql
 ```json
  "channelsList": ["mychannel"],
- "enableTls":true, 
  "mysql":{
       "host":"172.16.10.162",
       "database":"fabricexplorer",
@@ -59,7 +49,7 @@ Run the database setup scripts located under `db/fabricexplorer.sql`
    }
 ```
 
-5. modify app/network-config.json or app/network-config-tls.json(if you use tls communication) 
+5. 修改 app/network-config.json ,配置节点信息
 
 ```json
  {
@@ -108,8 +98,8 @@ Run the database setup scripts located under `db/fabricexplorer.sql`
 				"server-hostname": "peer1.org2.example.com"
 			},
 			"admin": {
-				"key": "/artifacts/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore",
-				"cert": "/artifacts/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts"
+				"key": "../artifacts/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/5681d5bed252077272137ebbcd141616229862fa4deeedbb9c1cb515e95ed82d_sk",
+				"cert": "../artifacts/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/Admin@org2.example.com-cert.pem"
 			}
 		}
 	}

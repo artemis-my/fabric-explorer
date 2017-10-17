@@ -32,22 +32,14 @@ Run the database setup scripts located under `db/fabricexplorer.sql`
 
 `mysql -u<username> -p < db/fabricexplorer.sql`
 
-## set fabric docker env
-
-1. `git clone https://github.com/onechain/fabric-docker-compose-svt.git`
-2. `mv fabric-docker-compose-svt $GOPATH/src/github.com/hyperledger/fabric/examples/`
-3. `cd $GOPATH/src/github.com/hyperledger/fabric/examples/fabric-docker-compose-svt`
-4. `./download_images.sh`
-5. `./start.sh`
-
-
 ## start fabric-explorer
 
-1. `git clone https://github.com/onechain/fabric-explorer.git`
-2. `rm -rf ./artifacts/crypto-config/`
-3. `cp -r $GOPATH/src/github.com/hyperledger/fabric/examples/fabric-docker-compose-svt/crypto-config ./fabric-explorer/artifacts/crypto-config/`
+1.`cd /opt/gopath/src/github.com/hyperledger/fabric/examples/e2e_cli/`
+2.`git clone https://github.com/shipx123/fabric-explorer.git`
+3. `rm -rf ./artifacts/crypto-config/`
+4. `cp -r $GOPATH/src/github.com/hyperledger/fabric/examples/e2e_cli/crypto-config ./artifacts`
 
-4. modify config.json,set channel,mysql,tls (if you use tls communication, please set  enableTls  true ,if not set false) 
+5. modify config.json,set channel,mysql,tls (if you use tls communication, please set  enableTls  true ,if not set false) 
 ```json
  "channelsList": ["mychannel"],
  "enableTls":true, 
@@ -59,33 +51,27 @@ Run the database setup scripts located under `db/fabricexplorer.sql`
    }
 ```
 
-5. modify app/network-config.json or app/network-config-tls.json(if you use tls communication) 
+6. modify app/network-config.json or app/network-config-tls.json(if you use tls communication) 
 
 ```json
  {
 	"network-config": {
 		"orderer": [{
-			"url": "grpc://112.124.115.82:7050",
-			"server-hostname": "orderer0.example.com"
-		},{
-			"url": "grpc://112.124.115.82:8050",
-			"server-hostname": "orderer1.example.com"
-		},{
-			"url": "grpc://112.124.115.82:9050",
-			"server-hostname": "orderer2.example.com"
+			"url": "grpc://192.168.6.139:7050",
+			"server-hostname": "orderer.example.com"
 		}],
 		"org1": {
 			"name": "peerOrg1",
 			"mspid": "Org1MSP",
-			"ca": "http://112.124.115.82:7054",
+			"ca": "http://192.168.6.139:7054",
 			"peer1": {
-				"requests": "grpc://112.124.115.82:7051",
-				"events": "grpc://112.124.115.82:7053",
+				"requests": "grpc://192.168.6.139:7051",
+				"events": "grpc://192.168.6.139:7053",
 				"server-hostname": "peer0.org1.example.com"
 			},
 			"peer2": {
-				"requests": "grpc://112.124.115.82:8051",
-				"events": "grpc://112.124.115.82:8053",
+				"requests": "grpc://192.168.6.139:8051",
+				"events": "grpc://192.168.6.139:8053",
 				"server-hostname": "peer1.org1.example.com"
 			},
 			"admin": {
@@ -96,15 +82,15 @@ Run the database setup scripts located under `db/fabricexplorer.sql`
 		"org2": {
 			"name": "peerOrg2",
 			"mspid": "Org2MSP",
-			"ca": "http://112.124.115.82:8054",
+			"ca": "http://192.168.6.139:8054",
 			"peer1": {
-				"requests": "grpc://112.124.115.82:9051",
-				"events": "grpc://112.124.115.82:9053",
+				"requests": "grpc://192.168.6.139:9051",
+				"events": "grpc://192.168.6.139:9053",
 				"server-hostname": "peer0.org2.example.com"
 			},
 			"peer2": {
-				"requests": "grpc://112.124.115.82:10051",
-				"events": "grpc://112.124.115.82:10053",
+				"requests": "grpc://192.168.6.139:10051",
+				"events": "grpc://192.168.6.139:10053",
 				"server-hostname": "peer1.org2.example.com"
 			},
 			"admin": {
@@ -114,7 +100,6 @@ Run the database setup scripts located under `db/fabricexplorer.sql`
 		}
 	}
 }
-```
 
-6. `npm install`
-7. `./start.sh`
+```
+8. `./start.sh`

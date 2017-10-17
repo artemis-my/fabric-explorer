@@ -34,8 +34,8 @@ Run the database setup scripts located under `db/fabricexplorer.sql`
 
 ## start fabric-explorer
 
-1.`cd /opt/gopath/src/github.com/hyperledger/fabric/examples/e2e_cli/`
-2.`git clone https://github.com/shipx123/fabric-explorer.git`
+1. `cd /opt/gopath/src/github.com/hyperledger/fabric/examples/e2e_cli/`
+2. `git clone https://github.com/shipx123/fabric-explorer.git`
 3. `rm -rf ./artifacts/crypto-config/`
 4. `cp -r $GOPATH/src/github.com/hyperledger/fabric/examples/e2e_cli/crypto-config ./artifacts`
 
